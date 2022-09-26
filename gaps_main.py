@@ -334,12 +334,12 @@ class gaps_synthesizer:
             intersection = cur_set.intersection(set(self.current_novel_classes))
 
             #########################################################################
-            print('print current set for {}:'.format(i))
-            print(cur_set)
-            print('print current novel classes for {}: '.format(i))
-            print(set(self.current_novel_classes))
-            print('print num of novel instances for {}: '.format(i))
-            print(intersection)
+            # print('print current set for {}:'.format(i))
+            # print(cur_set)
+            # print('print current novel classes for {}: '.format(i))
+            # print(set(self.current_novel_classes))
+            # print('print num of novel instances for {}: '.format(i))
+            # print(intersection)
             #########################################################################
 
             assert len(intersection) > 0
