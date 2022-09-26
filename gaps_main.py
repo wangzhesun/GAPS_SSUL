@@ -287,11 +287,27 @@ def validate(opts, model, loader, device, metrics):
 class gaps_synthesizer:
     def __init__(self, opts, dataset_dict):
         assert opts.curr_step > 0
+        self.opts = opts
         self.old_novel_classes = []
+
+        #########################################################################
+        self.base_classes = list(range(len(get_tasks(opts.dataset, opts.task, 0))))
+        start = -1
         for novel_step in range(1, opts.curr_step):
-            self.old_novel_classes += get_tasks(opts.dataset, opts.task, novel_step)
-        self.current_novel_classes = get_tasks(opts.dataset, opts.task, opts.curr_step)
-        self.base_classes = get_tasks(opts.dataset, opts.task, 0)
+            start = len(self.old_novel_classes) + len(self.base_classes)
+            self.old_novel_classes += list(range(start, start + len(get_tasks(opts.dataset, opts.task, novel_step))))
+
+        # new_start = len(self.old_novel_classes)
+        self.current_novel_classes = list(range(start, start + len(get_tasks(opts.dataset, opts.task, opts.curr_step))))
+        # self.base_classes = list(range(len(get_tasks(opts.dataset, opts.task, 0))))
+
+
+
+        # for novel_step in range(1, opts.curr_step):
+        #     self.old_novel_classes += get_tasks(opts.dataset, opts.task, novel_step)
+        # self.current_novel_classes = get_tasks(opts.dataset, opts.task, opts.curr_step)
+        # self.base_classes = get_tasks(opts.dataset, opts.task, 0)
+        #########################################################################
         self.num_base_classes = len(self.base_classes) - 1  # remove bg
         if opts.unknown:
             for i in range(len(self.old_novel_classes)):
@@ -309,6 +325,12 @@ class gaps_synthesizer:
             # image_chw; mask_hw, sal_map_hw, raw_fn
             img_chw, mask_hw, _, _ = dataset_dict['vanilla_train'][i]
             cur_set = set([i.item() for i in torch.unique(mask_hw)])
+
+            #########################################################################
+
+            #########################################################################
+
+
             intersection = cur_set.intersection(set(self.current_novel_classes))
 
             #########################################################################
