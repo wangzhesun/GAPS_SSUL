@@ -85,10 +85,12 @@ class COCOSegmentation(data.Dataset):
 
                 idxs = final_index_list
 
-                if self.num_shot == 5:
-                    idxs = idxs * 20
-                elif self.num_shot == 1:
-                    idxs = idxs * 100
+                ###################################################################
+                # if self.num_shot == 5:
+                #     idxs = idxs * 20
+                # elif self.num_shot == 1:
+                #     idxs = idxs * 100
+                ###################################################################
 
                 self.dataset = Subset(dataset, idxs)
             elif image_set == 'memory':

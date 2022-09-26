@@ -392,8 +392,12 @@ class gaps_synthesizer:
             t = 1. / total_classes
 
             ###################################################################
-            # print('print num of novel instances: ')
-            # print(num_novel_instances)
+            print('print candidate classes: ')
+            print(candidate_classes)
+            print('print partial data pool keys: ')
+            print(self.partial_data_pool.keys())
+            print('print novel obj id:')
+            print(novel_obj_id)
             ###################################################################
 
             f_n = num_novel_instances / 500
