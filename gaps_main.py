@@ -293,7 +293,17 @@ class gaps_synthesizer:
             img_chw, mask_hw, _, _ = dataset_dict['vanilla_train'][i]
             cur_set = set([i.item() for i in torch.unique(mask_hw)])
             intersection = cur_set.intersection(set(self.current_novel_classes))
-            # assert len(intersection) > 0
+
+            #########################################################################
+            print('print current set for {}:'.format(i))
+            print(cur_set)
+            print('print current novel classes for {}: '.format(i))
+            print(set(self.current_novel_classes))
+            print('print num of novel instances for {}: '.format(i))
+            print(intersection)
+            #########################################################################
+
+            assert len(intersection) > 0
             # train dataset does not have annotations of old classes
             for cls_id_presented in intersection:
                 img_roi, mask_roi = crop_partial_img(img_chw, mask_hw, cls_id_presented)
@@ -341,8 +351,8 @@ class gaps_synthesizer:
 
 
             ###################################################################
-            print('print num of novel instances: ')
-            print(num_novel_instances)
+            # print('print num of novel instances: ')
+            # print(num_novel_instances)
             ###################################################################
 
 
