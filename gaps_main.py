@@ -338,6 +338,15 @@ class gaps_synthesizer:
         strat = 'vRFS'
         if strat == 'vRFS':
             t = 1. / total_classes
+
+
+            ###################################################################
+            print('print num of novel instances: ')
+            print(num_novel_instances)
+            ###################################################################
+
+
+
             f_n = num_novel_instances / 500
             r_e = max(1, np.sqrt(t / f_n))
             r_n = r_e
