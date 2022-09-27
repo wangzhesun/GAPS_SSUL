@@ -301,7 +301,10 @@ class gaps_synthesizer:
         self.current_novel_classes = list(range(start, start + len(get_tasks(opts.dataset, opts.task, opts.curr_step))))
         # self.base_classes = list(range(len(get_tasks(opts.dataset, opts.task, 0))))
 
-
+        print('print old novel classes: ')
+        print(self.old_novel_classes)
+        print('print current novel classes: ')
+        print(self.current_novel_classes)
 
         # for novel_step in range(1, opts.curr_step):
         #     self.old_novel_classes += get_tasks(opts.dataset, opts.task, novel_step)
