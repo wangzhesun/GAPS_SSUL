@@ -86,10 +86,10 @@ class COCOSegmentation(data.Dataset):
                 idxs = final_index_list
 
                 ###################################################################
-                # if self.num_shot == 5:
-                #     idxs = idxs * 20
-                # elif self.num_shot == 1:
-                #     idxs = idxs * 100
+                if self.num_shot == 5:
+                    idxs = idxs * 20
+                elif self.num_shot == 1:
+                    idxs = idxs * 100
                 ###################################################################
 
                 self.dataset = Subset(dataset, idxs)
@@ -127,21 +127,21 @@ class COCOSegmentation(data.Dataset):
                                                 range(len(all_classes))]
 
         ###########################################################
-        if self.image_set == 'memory':
-            memory_class_occur = []
-            for i in range(len(self.dataset)):
-                img_chw, mask_hw, _ = self.dataset[i]
-                target = mask_hw.type(torch.float)
-                target = self.gt_label_mapping(target)
-
-                target = torch.from_numpy(np.array(target, dtype='uint8'))
-
-                target = target.long()
-                cur_set = set([i.item() for i in torch.unique(target)])
-                memory_class_occur.extend(cur_set)
-            memory_class_occur = set(memory_class_occur)
-            print('print memory classes occured in coco.py: ')
-            print(memory_class_occur)
+        # if self.image_set == 'memory':
+        #     memory_class_occur = []
+        #     for i in range(len(self.dataset)):
+        #         img_chw, mask_hw, _ = self.dataset[i]
+        #         target = mask_hw.type(torch.float)
+        #         target = self.gt_label_mapping(target)
+        #
+        #         target = torch.from_numpy(np.array(target, dtype='uint8'))
+        #
+        #         target = target.long()
+        #         cur_set = set([i.item() for i in torch.unique(target)])
+        #         memory_class_occur.extend(cur_set)
+        #     memory_class_occur = set(memory_class_occur)
+        #     print('print memory classes occured in coco.py: ')
+        #     print(memory_class_occur)
     ###########################################################
 
 
