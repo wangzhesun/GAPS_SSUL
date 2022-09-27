@@ -390,16 +390,6 @@ class gaps_synthesizer:
         strat = 'vRFS'
         if strat == 'vRFS':
             t = 1. / total_classes
-
-            ###################################################################
-            print('print candidate classes: ')
-            print(candidate_classes)
-            print('print partial data pool keys: ')
-            print(self.partial_data_pool.keys())
-            print('print novel obj id:')
-            print(novel_obj_id)
-            ###################################################################
-
             f_n = num_novel_instances / 500
             r_e = max(1, np.sqrt(t / f_n))
             r_n = r_e
@@ -432,7 +422,26 @@ class gaps_synthesizer:
             # select an old class
             for i in range(num_existing_objects):
                 selected_class = np.random.choice(candidate_classes)
-                selected_sample = random.choice(self.partial_data_pool[selected_class])
+                #############################################################################
+                try:
+                    selected_sample = random.choice(self.partial_data_pool[selected_class])
+                except:
+                    print('print candidate classes: ')
+                    print(candidate_classes)
+                    print('print selected class: ')
+                    print(selected_class)
+                    print('print partial data pool at selected class: ')
+                    print(self.partial_data_pool[selected_class])
+                    print('print partial data pool: ')
+                    print(self.partial_data_pool)
+                    # print('print novel obj id:')
+                    # print(novel_obj_id)
+                    # print()
+                    return
+
+
+                # selected_sample = random.choice(self.partial_data_pool[selected_class])
+                ##############################################################################
                 full_img_chw, full_mask_hw, img_chw, mask_hw = selected_sample
                 syn_img_chw, syn_mask_hw = copy_and_paste(img_chw, mask_hw, syn_img_chw,
                                                           syn_mask_hw, selected_class)
