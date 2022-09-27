@@ -301,11 +301,6 @@ class gaps_synthesizer:
         self.current_novel_classes = list(range(start, start + len(get_tasks(opts.dataset, opts.task, opts.curr_step))))
         # self.base_classes = list(range(len(get_tasks(opts.dataset, opts.task, 0))))
 
-        print('print old novel classes: ')
-        print(self.old_novel_classes)
-        print('print current novel classes: ')
-        print(self.current_novel_classes)
-
         # for novel_step in range(1, opts.curr_step):
         #     self.old_novel_classes += get_tasks(opts.dataset, opts.task, novel_step)
         # self.current_novel_classes = get_tasks(opts.dataset, opts.task, opts.curr_step)
@@ -319,6 +314,13 @@ class gaps_synthesizer:
                 self.current_novel_classes[i] += 1
         self.partial_data_pool = {}
         self.register_partial_images(dataset_dict)
+
+        #######################################################
+        print('print old novel classes: ')
+        print(self.old_novel_classes)
+        print('print current novel classes: ')
+        print(self.current_novel_classes)
+        #####################################################
 
     def register_partial_images(self, dataset_dict):
         # Register the newest classes
