@@ -126,6 +126,20 @@ class COCOSegmentation(data.Dataset):
         self.ordering_map[:len(all_classes)] = [all_classes.index(x) for x in
                                                 range(len(all_classes))]
 
+        ###########################################################
+        if self.image_set == 'memory':
+            memory_class_occur = []
+            for i in range(len(self.dataset)):
+                img_chw, mask_hw, _, _ = self.dataset[i]
+                target = mask_hw.type(torch.float)
+                target = self.gt_label_mapping(target)
+                cur_set = set([i.item() for i in torch.unique(target)])
+                memory_class_occur.extend(cur_set)
+            memory_class_occur = set(memory_class_occur)
+            print('print memory classes occured in coco.py: ')
+            print(memory_class_occur)
+    ###########################################################
+
 
     def __getitem__(self, index):
         img, target, file_id = self.dataset[index]
