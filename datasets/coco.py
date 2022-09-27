@@ -130,7 +130,7 @@ class COCOSegmentation(data.Dataset):
         if self.image_set == 'memory':
             memory_class_occur = []
             for i in range(len(self.dataset)):
-                img_chw, mask_hw, _, _ = self.dataset[i]
+                img_chw, mask_hw, _= self.dataset[i]
                 target = mask_hw.type(torch.float)
                 target = self.gt_label_mapping(target)
                 cur_set = set([i.item() for i in torch.unique(target)])
