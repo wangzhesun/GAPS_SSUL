@@ -321,15 +321,17 @@ class gaps_synthesizer:
         # Register the newest classes
         for cls in self.current_novel_classes:
             self.partial_data_pool[cls] = []
+
+        #################################################
+        novel_class_occur = []
+        old_class_occur = []
+        #################################################
+
+
         for i in range(len(dataset_dict['vanilla_train'])):
             # image_chw; mask_hw, sal_map_hw, raw_fn
             img_chw, mask_hw, _, _ = dataset_dict['vanilla_train'][i]
             cur_set = set([i.item() for i in torch.unique(mask_hw)])
-
-            #########################################################################
-
-            #########################################################################
-
 
             intersection = cur_set.intersection(set(self.current_novel_classes))
 
@@ -349,6 +351,15 @@ class gaps_synthesizer:
                 assert mask_roi.shape[0] > 0 and mask_roi.shape[1] > 0
                 self.partial_data_pool[cls_id_presented].append(
                     (img_chw, mask_hw, img_roi, mask_roi))
+
+            #################################################
+            novel_class_occur.extend(intersection)
+        novel_class_occur = set(novel_class_occur)
+        print('print novel classes occured: ')
+        print(novel_class_occur)
+        #################################################
+
+
         # Register memory of old classes
         for cls in self.old_novel_classes:
             self.partial_data_pool[cls] = []
@@ -365,6 +376,12 @@ class gaps_synthesizer:
                 assert mask_roi.shape[0] > 0 and mask_roi.shape[1] > 0
                 self.partial_data_pool[cls_id_presented].append(
                     (img_chw, mask_hw, img_roi, mask_roi))
+            #################################################
+            old_class_occur.extend(intersection)
+        old_class_occur = set(old_class_occur)
+        print('print old classes occured: ')
+        print(old_class_occur)
+            #################################################
 
     def apply_gaps(self, augmented_base_img, augmented_base_label):
         assert augmented_base_img.shape[0] == augmented_base_label.shape[0]
