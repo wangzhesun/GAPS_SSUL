@@ -330,6 +330,7 @@ class gaps_synthesizer:
         #################################################
         novel_class_occur = []
         old_class_occur = []
+        memory_class_occur = []
         #################################################
 
 
@@ -374,6 +375,12 @@ class gaps_synthesizer:
                 # Memory class does not consider uncertainty estimate
                 mask_hw[mask_hw >= 1] = mask_hw[mask_hw >= 1] + 1
             cur_set = set([i.item() for i in torch.unique(mask_hw)])
+
+            #################################################################
+            memory_class_occur.extend(cur_set)
+            #################################################################
+
+
             intersection = cur_set.intersection(set(self.old_novel_classes))
             # train dataset does not have annotations of old classes
             for cls_id_presented in intersection:
@@ -386,6 +393,9 @@ class gaps_synthesizer:
         old_class_occur = set(old_class_occur)
         print('print old classes occured: ')
         print(old_class_occur)
+        memory_class_occur = set(memory_class_occur)
+        print('print memory classes occured: ')
+        print(memory_class_occur)
             #################################################
 
     def apply_gaps(self, augmented_base_img, augmented_base_label):
