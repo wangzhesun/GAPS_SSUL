@@ -113,17 +113,17 @@ class VOCSegmentation(data.Dataset):
 
             file_names = final_file_name
 
-            while len(file_names) < opts.batch_size:
+            if opts.few_shot and image_set == "train" and cil_step > 0:
                 if opts.num_shot == 1:
                     file_names = file_names * 100
-                elif opts.num_shot == 2:
-                    file_names = file_names * 50
-                elif opts.num_shot == 3:
-                    file_names = file_names * 33
-                elif opts.num_shot == 4:
-                    file_names = file_names * 25
                 elif opts.num_shot == 5:
                     file_names = file_names * 20
+                elif opts.num_shot == 10:
+                    file_names = file_names * 10
+                elif opts.num_shot == 20:
+                    file_names = file_names * 5
+                elif opts.num_shot == 40:
+                    file_names = file_names * 3
             ############################################################################################
             
         self.images = [os.path.join(image_dir, x + ".jpg") for x in file_names]
