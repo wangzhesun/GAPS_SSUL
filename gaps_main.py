@@ -316,10 +316,10 @@ class gaps_synthesizer:
         self.register_partial_images(dataset_dict)
 
         #######################################################
-        print('print old novel classes: ')
-        print(self.old_novel_classes)
-        print('print current novel classes: ')
-        print(self.current_novel_classes)
+        # print('print old novel classes: ')
+        # print(self.old_novel_classes)
+        # print('print current novel classes: ')
+        # print(self.current_novel_classes)
         #####################################################
         #################################################
         for k in self.partial_data_pool:
@@ -333,9 +333,9 @@ class gaps_synthesizer:
             self.partial_data_pool[cls] = []
 
         #################################################
-        novel_class_occur = []
-        old_class_occur = []
-        memory_class_occur = []
+        # novel_class_occur = []
+        # old_class_occur = []
+        # memory_class_occur = []
         # #################################################
 
 
@@ -364,10 +364,10 @@ class gaps_synthesizer:
                     (img_chw, mask_hw, img_roi, mask_roi))
 
             #################################################
-            novel_class_occur.extend(intersection)
-        novel_class_occur = set(novel_class_occur)
-        print('print novel classes occured: ')
-        print(novel_class_occur)
+        #     novel_class_occur.extend(intersection)
+        # novel_class_occur = set(novel_class_occur)
+        # print('print novel classes occured: ')
+        # print(novel_class_occur)
         #################################################
 
 
@@ -394,13 +394,13 @@ class gaps_synthesizer:
                 self.partial_data_pool[cls_id_presented].append(
                     (img_chw, mask_hw, img_roi, mask_roi))
             #################################################
-            old_class_occur.extend(intersection)
-        old_class_occur = set(old_class_occur)
-        print('print old classes occured: ')
-        print(old_class_occur)
-        memory_class_occur = set(memory_class_occur)
-        print('print memory classes occured: ')
-        print(memory_class_occur)
+        #     old_class_occur.extend(intersection)
+        # old_class_occur = set(old_class_occur)
+        # print('print old classes occured: ')
+        # print(old_class_occur)
+        # memory_class_occur = set(memory_class_occur)
+        # print('print memory classes occured: ')
+        # print(memory_class_occur)
             #################################################
 
 
@@ -461,24 +461,24 @@ class gaps_synthesizer:
             for i in range(num_existing_objects):
                 selected_class = np.random.choice(candidate_classes)
                 #############################################################################
-                try:
-                    selected_sample = random.choice(self.partial_data_pool[selected_class])
-                except:
-                    print('print candidate classes: ')
-                    print(candidate_classes)
-                    print('print selected class: ')
-                    print(selected_class)
-                    print('print partial data pool at selected class: ')
-                    print(self.partial_data_pool[selected_class])
-                    # print('print partial data pool: ')
-                    # print(self.partial_data_pool)
-                    # print('print novel obj id:')
-                    # print(novel_obj_id)
-                    # print()
-                    return
+                # try:
+                #     selected_sample = random.choice(self.partial_data_pool[selected_class])
+                # except:
+                #     print('print candidate classes: ')
+                #     print(candidate_classes)
+                #     print('print selected class: ')
+                #     print(selected_class)
+                #     print('print partial data pool at selected class: ')
+                #     print(self.partial_data_pool[selected_class])
+                #     # print('print partial data pool: ')
+                #     # print(self.partial_data_pool)
+                #     # print('print novel obj id:')
+                #     # print(novel_obj_id)
+                #     # print()
+                #     return
                 #
                 #
-                # selected_sample = random.choice(self.partial_data_pool[selected_class])
+                selected_sample = random.choice(self.partial_data_pool[selected_class])
                 ##############################################################################
                 full_img_chw, full_mask_hw, img_chw, mask_hw = selected_sample
                 syn_img_chw, syn_mask_hw = copy_and_paste(img_chw, mask_hw, syn_img_chw,

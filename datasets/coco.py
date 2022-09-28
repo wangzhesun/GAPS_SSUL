@@ -127,21 +127,21 @@ class COCOSegmentation(data.Dataset):
                                                 range(len(all_classes))]
 
         ###########################################################
-        if self.image_set == 'memory':
-            memory_class_occur = []
-            for i in range(len(self.dataset)):
-                img_chw, mask_hw, _ = self.dataset[i]
-                target = mask_hw.type(torch.float)
-                target = self.gt_label_mapping(target)
-
-                target = torch.from_numpy(np.array(target, dtype='uint8'))
-
-                target = target.long()
-                cur_set = set([i.item() for i in torch.unique(target)])
-                memory_class_occur.extend(cur_set)
-            memory_class_occur = set(memory_class_occur)
-            print('print memory classes occured in coco.py: ')
-            print(memory_class_occur)
+        # if self.image_set == 'memory':
+        #     memory_class_occur = []
+        #     for i in range(len(self.dataset)):
+        #         img_chw, mask_hw, _ = self.dataset[i]
+        #         target = mask_hw.type(torch.float)
+        #         target = self.gt_label_mapping(target)
+        #
+        #         target = torch.from_numpy(np.array(target, dtype='uint8'))
+        #
+        #         target = target.long()
+        #         cur_set = set([i.item() for i in torch.unique(target)])
+        #         memory_class_occur.extend(cur_set)
+        #     memory_class_occur = set(memory_class_occur)
+        #     print('print memory classes occured in coco.py: ')
+        #     print(memory_class_occur)
     ###########################################################
 
 
