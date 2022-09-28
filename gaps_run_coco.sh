@@ -8,8 +8,8 @@ LOSS=bce_loss
 LR=0.01 # 0.01# try decreasing learning rate
 THRESH=0.7
 FEWSHOT=True
-#NUMSHOT=5
-NUMSHOT=1
+NUMSHOT=5
+#NUMSHOT=1
 MEMORY=500 # [0 (for SSUL), 100 (for SSUL-M)]
 
 ###### few shot step 1 - last
