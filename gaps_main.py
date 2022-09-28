@@ -322,9 +322,16 @@ class gaps_synthesizer:
         # print(self.current_novel_classes)
         #####################################################
         #################################################
+        tmp = {}
+
         for k in self.partial_data_pool:
-            if len(self.partial_data_pool[k]) == 0:
-                self.partial_data_pool.pop(k)
+            if len(self.partial_data_pool[k]) != 0:
+                tmp[k] = self.partial_data_pool[k]
+
+        self.partial_data_pool = tmp
+        # for k in self.partial_data_pool:
+        #     if len(self.partial_data_pool[k]) == 0:
+        #         self.partial_data_pool.pop(k)
         #################################################
 
     def register_partial_images(self, dataset_dict):
