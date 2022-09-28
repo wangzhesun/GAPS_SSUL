@@ -894,7 +894,7 @@ if __name__ == '__main__':
 
     opts = get_argparser().parse_args()
 
-    start_step = 0 + 3 #1
+    start_step = 0 + 1 #1
     total_step = len(get_tasks(opts.dataset, opts.task))
 
     np.random.seed(1234)
