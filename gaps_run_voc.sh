@@ -1,6 +1,6 @@
 DATA_ROOT=../data/VOCdevkit/VOC2012
 DATASET=voc
-TASK=15-1-split0
+TASK=15-1-split1
 EPOCH=50
 BATCH=16
 LOSS=bce_loss
@@ -17,6 +17,6 @@ python3 gaps_main.py --crop_val --data_root ${DATA_ROOT} --model deeplabv3_resne
         --dataset ${DATASET} --task ${TASK} --lr_policy poly --pseudo --pseudo_thresh ${THRESH} \
         --freeze --bn_freeze --unknown --w_transfer --amp --mem_size ${MEMORY} \
         --few_shot ${FEWSHOT} --num_shot ${NUMSHOT} \
-        --ckpt ./checkpoints/deeplabv3_resnet101_voc_15-1-split0_step_0_disjoint.pth \
+        --ckpt ./checkpoints/deeplabv3_resnet101_voc_15-1-split1_step_0_disjoint.pth \
 
 ############  DO NOT forget to change the class old in tasks.py
