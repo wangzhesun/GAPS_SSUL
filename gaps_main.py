@@ -382,7 +382,7 @@ class gaps_synthesizer:
             cur_set = set([i.item() for i in torch.unique(mask_hw)])
 
             #################################################################
-            memory_class_occur.extend(cur_set)
+            # memory_class_occur.extend(cur_set)
             #################################################################
 
 
