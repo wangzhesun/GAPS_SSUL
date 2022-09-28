@@ -397,6 +397,11 @@ class gaps_synthesizer:
         print('print memory classes occured: ')
         print(memory_class_occur)
             #################################################
+        #################################################
+        for k in self.partial_data_pool:
+            if len(self.partial_data_pool[k]) == 0:
+                self.partial_data_pool.pop(k)
+        #################################################
 
     def apply_gaps(self, augmented_base_img, augmented_base_label):
         assert augmented_base_img.shape[0] == augmented_base_label.shape[0]
