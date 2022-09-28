@@ -795,7 +795,10 @@ def main(opts, seed):
                 mem_iter = iter(memory_loader)
                 m_images, m_labels, m_sal_maps, _ = mem_iter.next()
 
-            gaps_rand_idx = torch.randperm(opts.batch_size)[:opts.batch_size // 2].cuda()
+            ##################################################################################
+            gaps_rand_idx = torch.randperm(opts.batch_size).cuda()
+            # gaps_rand_idx = torch.randperm(opts.batch_size)[:opts.batch_size // 2].cuda()
+            ########################################################################################
 
             m_images[gaps_rand_idx], m_labels[gaps_rand_idx] = my_gaps_synthesizer.apply_gaps(
                 m_images[gaps_rand_idx], m_labels[gaps_rand_idx])
@@ -815,25 +818,29 @@ def main(opts, seed):
 
             outputs = model(images)
 
-            if opts.pseudo and opts.curr_step > 0:
-                """ pseudo labeling """
-                with torch.no_grad():
-                    outputs_prev = model_prev(images)
+            ############################################################################################
+            loss = criterion(outputs, labels)
 
-                if opts.loss_type == 'bce_loss':
-                    pred_prob = torch.sigmoid(outputs_prev).detach()
-                else:
-                    pred_prob = torch.softmax(outputs_prev, 1).detach()
-
-                pred_scores, pred_labels = torch.max(pred_prob, dim=1)
-                pseudo_labels = torch.where((labels <= fg_idx) & (pred_labels > fg_idx) & (
-                            pred_scores >= opts.pseudo_thresh),
-                                            pred_labels,
-                                            labels)
-
-                loss = criterion(outputs, pseudo_labels)
-            else:
-                loss = criterion(outputs, labels)
+            # if opts.pseudo and opts.curr_step > 0:
+            #     """ pseudo labeling """
+            #     with torch.no_grad():
+            #         outputs_prev = model_prev(images)
+            #
+            #     if opts.loss_type == S'bce_loss':
+            #         pred_prob = torch.sigmoid(outputs_prev).detach()
+            #     else:
+            #         pred_prob = torch.softmax(outputs_prev, 1).detach()
+            #
+            #     pred_scores, pred_labels = torch.max(pred_prob, dim=1)
+            #     pseudo_labels = torch.where((labels <= fg_idx) & (pred_labels > fg_idx) & (
+            #                 pred_scores >= opts.pseudo_thresh),
+            #                                 pred_labels,
+            #                                 labels)
+            #
+            #     loss = criterion(outputs, pseudo_labels)
+            # else:
+            #     loss = criterion(outputs, labels)
+            ############################################################################################
 
         scaler.scale(loss).backward()
         scaler.step(optimizer)
