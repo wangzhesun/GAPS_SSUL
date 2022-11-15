@@ -10,7 +10,7 @@ FEWSHOT=True
 NUMSHOT=5
 #NUMSHOT=1
 #NUMSHOT=150
-MEMORY=300 # [0 (for SSUL), 100 (for SSUL-M)]
+MEMORY=100 # [0 (for SSUL), 100 (for SSUL-M)]
 
 
 ### few shot
