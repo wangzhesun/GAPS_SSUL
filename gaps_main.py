@@ -807,7 +807,10 @@ def main(opts, seed):
             m_labels = m_labels.to(device, dtype=torch.long, non_blocking=True)
             m_sal_maps = m_sal_maps.to(device, dtype=torch.long, non_blocking=True)
 
-            rand_index = torch.randperm(opts.batch_size)[:opts.batch_size].cuda()
+            ##################################################################################
+            # rand_index = torch.randperm(opts.batch_size)[:opts.batch_size].cuda()
+            rand_index = torch.randperm(opts.batch_size)[:opts.batch_size // 2].cuda()
+            ##################################################################################
             images[rand_index, ...] = m_images[rand_index, ...]
             labels[rand_index, ...] = m_labels[rand_index, ...]
             sal_maps[rand_index, ...] = m_sal_maps[rand_index, ...]
